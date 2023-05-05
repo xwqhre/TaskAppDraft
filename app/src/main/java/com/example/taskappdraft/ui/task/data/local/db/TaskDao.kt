@@ -1,0 +1,25 @@
+package com.example.taskappdraft.ui.task.data.local.db
+
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.Query
+import androidx.room.Update
+import com.example.taskappdraft.ui.task.model.TaskModel
+
+@Dao
+interface TaskDao {
+
+    @Query("SELECT * FROM taskModel")
+    fun getAll(): List<TaskModel>
+
+    @Insert
+    fun insert(taskModel: TaskModel)
+
+    @Delete
+    fun delete(taskModel: TaskModel)
+
+    @Update
+    fun update(taskModel: TaskModel)
+
+}

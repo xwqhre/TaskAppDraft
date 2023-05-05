@@ -1,5 +1,7 @@
 package com.example.taskappdraft.ui.home
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +12,14 @@ import com.example.taskappdraft.App
 import com.example.taskappdraft.R
 import com.example.taskappdraft.databinding.FragmentHomeBinding
 import com.example.taskappdraft.ui.adapter.TaskAdapter
+import com.example.taskappdraft.ui.task.model.TaskModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val adapter = TaskAdapter()
+    private val adapter = TaskAdapter(this::onLongClick)
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +28,7 @@ class HomeFragment : Fragment() {
     ): View {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return _binding?.root?: binding.root
+        return _binding?.root ?: binding.root
     }
 
     override fun onDestroyView() {
@@ -35,11 +39,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.recycleView.adapter = adapter
-       val list = App.dp.taskDao().getAll()
-       adapter.addTasks(list)
+        val list = App.dp.taskDao().getAll()
+        adapter.addTasks(list)
 
-        binding.fabHome.setOnClickListener{
+        binding.fabHome.setOnClickListener {
             findNavController().navigate(R.id.taskFragment)
         }
+
+
     }
+
+
+    private fun onLongClick(taskModel: TaskModel) {
+        val alertDialog = AlertDialog.Builder(requireContext())
+        alertDialog.setTitle("Вы точно хотите удалить?")
+        alertDialog.setNegativeButton("No", object : DialogInterface.OnClickListener {
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.cancel()
+            }
+        })
+
+        alertDialog.setPositiveButton("Yes",object : DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                App.dp.taskDao().delete(taskModel)
+                setData()
+            }
+        })
+        alertDialog.create().show()
+    }
+    private fun setData() {
+        val list = App.dp.taskDao().getAll()
+        adapter.addTasks(list)
+    }
+
 }

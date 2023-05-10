@@ -1,4 +1,4 @@
-package com.example.taskappdraft.ui.task.model
+package com.example.taskappdraft.model
 
  data class onBoardModel (
      val title: String? = null,

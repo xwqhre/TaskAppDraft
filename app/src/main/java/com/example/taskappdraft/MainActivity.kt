@@ -11,7 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.taskappdraft.databinding.ActivityMainBinding
-import com.example.taskappdraft.ui.task.data.local.Pref
+import com.example.taskappdraft.data.local.Pref
 
 class MainActivity : AppCompatActivity() {
 

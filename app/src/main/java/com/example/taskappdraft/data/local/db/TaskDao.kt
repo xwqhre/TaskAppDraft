@@ -1,11 +1,11 @@
-package com.example.taskappdraft.ui.task.data.local.db
+package com.example.taskappdraft.data.local.db
 
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import com.example.taskappdraft.ui.task.model.TaskModel
+import com.example.taskappdraft.model.TaskModel
 
 @Dao
 interface TaskDao {

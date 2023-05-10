@@ -1,12 +1,12 @@
-package com.example.taskappdraft.ui.adapter
+package com.example.taskappdraft.ui.home.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.taskappdraft.databinding.ItemTaskBinding
-import com.example.taskappdraft.ui.task.model.TaskModel
+import com.example.taskappdraft.model.TaskModel
 
-class TaskAdapter(private val onLongClick: (TaskModel)->Unit) :
+class TaskAdapter(private val onLongClick: (TaskModel)->Unit, private val onClick: (TaskModel)->Unit) :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     private val data = arrayListOf<TaskModel>()
@@ -44,6 +44,10 @@ class TaskAdapter(private val onLongClick: (TaskModel)->Unit) :
             itemView.setOnLongClickListener {
                 onLongClick(taskModel)
                 false
+            }
+
+            itemView.setOnClickListener {
+                onClick(taskModel)
             }
             }
         }

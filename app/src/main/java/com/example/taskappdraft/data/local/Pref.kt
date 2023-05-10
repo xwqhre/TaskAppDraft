@@ -1,4 +1,4 @@
-package com.example.taskappdraft.ui.task.data.local
+package com.example.taskappdraft.data.local
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE

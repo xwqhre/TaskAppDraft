@@ -7,9 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.taskappdraft.databinding.FragmentOnBoardingBinding
-import com.example.taskappdraft.ui.adapter.onBoardingAdapter
-import com.example.taskappdraft.ui.task.model.onBoardModel
-import com.example.taskappdraft.ui.task.data.local.Pref
+import com.example.taskappdraft.ui.OnBoard.adapter.onBoardingAdapter
+import com.example.taskappdraft.model.onBoardModel
+import com.example.taskappdraft.data.local.Pref
 
 class onBoardingFragment : Fragment() {
 

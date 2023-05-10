@@ -11,14 +11,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.taskappdraft.App
 import com.example.taskappdraft.R
 import com.example.taskappdraft.databinding.FragmentHomeBinding
-import com.example.taskappdraft.ui.adapter.TaskAdapter
-import com.example.taskappdraft.ui.task.model.TaskModel
+import com.example.taskappdraft.ui.home.adapter.TaskAdapter
+import com.example.taskappdraft.model.TaskModel
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
-    private val adapter = TaskAdapter(this::onLongClick)
+    private val adapter = TaskAdapter(this::onLongClick, this::onClick)
 
 
     override fun onCreateView(
@@ -45,11 +45,7 @@ class HomeFragment : Fragment() {
         binding.fabHome.setOnClickListener {
             findNavController().navigate(R.id.taskFragment)
         }
-
-
     }
-
-
     private fun onLongClick(taskModel: TaskModel) {
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.setTitle("Вы точно хотите удалить?")
@@ -70,6 +66,10 @@ class HomeFragment : Fragment() {
     private fun setData() {
         val list = App.dp.taskDao().getAll()
         adapter.addTasks(list)
+    }
+
+    private fun onClick(taskModel: TaskModel){
+        findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToTaskFragment(taskModel))
     }
 
 }

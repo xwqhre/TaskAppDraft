@@ -12,7 +12,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.addTextChangedListener
 import com.example.taskappdraft.databinding.FragmentProfileBinding
 import com.example.taskappdraft.ui.OnBoard.utils.loadImage
-import com.example.taskappdraft.ui.task.data.local.Pref
+import com.example.taskappdraft.data.local.Pref
 
 class ProfileFragment : Fragment() {
 

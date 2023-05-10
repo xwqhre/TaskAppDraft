@@ -9,7 +9,23 @@
         android:id="@+id/navigation_home"
         android:name="com.example.taskappdraft.ui.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_taskFragment"
+            app:destination="@id/taskFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.example.taskappdraft.ui.task.TaskFragment"
+        android:label="Task"
+        tools:layout="@layout/fragment_task" >
+        <argument
+            android:name="task"
+            android:defaultValue="@null"
+            app:nullable="true"
+            app:argType="com.example.taskappdraft.model.TaskModel"/>
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_dashboard"
@@ -22,19 +38,17 @@
         android:name="com.example.taskappdraft.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
-    <fragment
-        android:id="@+id/taskFragment"
-        android:name="com.example.taskappdraft.ui.task.TaskFragment"
-        android:label="Task"
-        tools:layout="@layout/fragment_task" />
+
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.taskappdraft.ui.profile.ProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_profile" />
+
     <fragment
         android:id="@+id/onBoardingFragment"
         android:name="com.example.taskappdraft.ui.OnBoard.onBoardingFragment"
         android:label="fragment_on_boarding"
         tools:layout="@layout/fragment_on_boarding" />
+
 </navigation>

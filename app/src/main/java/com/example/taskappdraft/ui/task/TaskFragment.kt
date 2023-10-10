@@ -53,7 +53,8 @@ class TaskFragment : Fragment() {
             )
             
             if (data.title!!.isEmpty() || data.desc!!.isEmpty()){
-                Toast.makeText(requireContext(), "Title and desc can not be empty", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Title and desc can not be empty",
+                    Toast.LENGTH_SHORT).show()
             }
 
             if (taskModel != null){
@@ -65,9 +66,7 @@ class TaskFragment : Fragment() {
                 App.dp.taskDao().insert(taskModel!!)
             }
             findNavController().navigateUp()
-
         }
-
     }
 
     companion object {

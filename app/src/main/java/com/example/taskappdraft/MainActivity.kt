@@ -1,22 +1,22 @@
 package com.example.taskappdraft
 
 import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.taskappdraft.databinding.ActivityMainBinding
 import com.example.taskappdraft.data.local.Pref
+import com.example.taskappdraft.databinding.ActivityMainBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var pref: Pref
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,41 +24,36 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         pref = Pref(this)
-
         val navView: BottomNavigationView = binding.navView
+        auth = FirebaseAuth.getInstance()
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         if (!pref.isUserSeen())
             navController.navigate(R.id.onBoardingFragment)
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home,
-                R.id.navigation_dashboard,
-                R.id.navigation_notifications,
-                R.id.navigation_profile,
-                R.id.taskFragment
-            )
+        if (auth.currentUser?.uid == null) {
+            navController.navigate(R.id.authFragment)
+        }
+
+        val bottomNavFragments = setOf(
+            R.id.navigation_home,
+            R.id.navigation_dashboard,
+            R.id.navigation_notifications,
+            R.id.navigation_profile
         )
 
-        navController.addOnDestinationChangedListener(object :
-            NavController.OnDestinationChangedListener{
-            override fun onDestinationChanged(
-                controller: NavController,
-                destination: NavDestination,
-                arguments: Bundle?
-            ) {
+        val appBarConfiguration = AppBarConfiguration(bottomNavFragments)
 
-                if (destination.id == R.id.onBoardingFragment){
-                    navView.isVisible = false
-                    supportActionBar?. hide()
-                }else{
-                    navView.isVisible = true
-                    supportActionBar?. show()
-                }
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            if (bottomNavFragments.contains(destination.id)) {
+                navView.isVisible = true
+                supportActionBar?.show()
+            } else {
+                navView.isVisible = false
+                supportActionBar?.hide()
             }
-        })
+        }
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)

@@ -32,7 +32,7 @@ class onBoardingFragment : Fragment() {
 
         binding.viewPager.adapter= adapter
         binding.indicator.setViewPager(binding.viewPager)
-        adapter.registerAdapterDataObserver(binding.indicator.adapterDataObserver);
+        adapter.registerAdapterDataObserver(binding.indicator.adapterDataObserver)
         binding.viewPager.adapter = adapter
 
     }

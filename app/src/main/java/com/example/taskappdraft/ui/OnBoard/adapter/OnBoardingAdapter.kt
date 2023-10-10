@@ -8,17 +8,35 @@ import com.example.taskappdraft.ui.OnBoard.utils.loadImage
 import com.example.taskappdraft.model.onBoardModel
 import kotlin.reflect.KFunction1
 
-class onBoardingAdapter(private val onClick: KFunction1<onBoardModel, Unit>):
+class onBoardingAdapter(private val onClick: KFunction1<onBoardModel, Unit>) :
     RecyclerView.Adapter<onBoardingAdapter.onBoardingViewHolder>() {
 
     val data = arrayListOf(
-        onBoardModel(title = "Title first", desc = "Description first",  "https://cdn-icons-png.flaticon.com/512/2098/2098402.png"),
-        onBoardModel(title = "Title second", desc = "Description second", "https://cdn-icons-png.flaticon.com/512/2098/2098402.png"),
-        onBoardModel(title = "Title third", desc = "Description third",  "https://cdn-icons-png.flaticon.com/512/2098/2098402.png")
+        onBoardModel(
+            title = "Title first",
+            desc = "Description first",
+            "https://cdn-icons-png.flaticon.com/512/2098/2098402.png"
+        ),
+        onBoardModel(
+            title = "Title second",
+            desc = "Description second",
+            "https://cdn-icons-png.flaticon.com/512/2098/2098402.png"
+        ),
+        onBoardModel(
+            title = "Title third",
+            desc = "Description third",
+            "https://cdn-icons-png.flaticon.com/512/2098/2098402.png"
+        )
     )
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): onBoardingViewHolder {
-        return onBoardingViewHolder(ItemBoardBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return onBoardingViewHolder(
+            ItemBoardBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: onBoardingViewHolder, position: Int) {
@@ -29,16 +47,15 @@ class onBoardingAdapter(private val onClick: KFunction1<onBoardModel, Unit>):
         return data.size
     }
 
-    inner class onBoardingViewHolder(private val binding: ItemBoardBinding):
+    inner class onBoardingViewHolder(private val binding: ItemBoardBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(onBoardModel: onBoardModel) {
-            binding.btnItem.setOnClickListener(){
+            binding.btnItem.setOnClickListener() {
                 onClick(onBoardModel)
-
             }
+
             binding.tvItemDesc.text = onBoardModel.desc
             binding.tvItemTitle.text = onBoardModel.title
-
             binding.imgItem.loadImage(onBoardModel.image)
         }
     }

@@ -46,6 +46,7 @@ class HomeFragment : Fragment() {
             findNavController().navigate(R.id.taskFragment)
         }
     }
+
     private fun onLongClick(taskModel: TaskModel) {
         val alertDialog = AlertDialog.Builder(requireContext())
         alertDialog.setTitle("Вы точно хотите удалить?")
@@ -55,7 +56,7 @@ class HomeFragment : Fragment() {
             }
         })
 
-        alertDialog.setPositiveButton("Yes",object : DialogInterface.OnClickListener{
+        alertDialog.setPositiveButton("Yes", object : DialogInterface.OnClickListener {
             override fun onClick(dialog: DialogInterface?, which: Int) {
                 App.dp.taskDao().delete(taskModel)
                 setData()
@@ -63,13 +64,17 @@ class HomeFragment : Fragment() {
         })
         alertDialog.create().show()
     }
+
     private fun setData() {
         val list = App.dp.taskDao().getAll()
         adapter.addTasks(list)
     }
 
-    private fun onClick(taskModel: TaskModel){
-        findNavController().navigate(HomeFragmentDirections.actionNavigationHomeToTaskFragment(taskModel))
+    private fun onClick(taskModel: TaskModel) {
+        findNavController().navigate(
+            HomeFragmentDirections.actionNavigationHomeToTaskFragment(
+                taskModel
+            )
+        )
     }
-
 }

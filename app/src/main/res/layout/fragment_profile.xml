@@ -3,23 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/purple_200"
     android:orientation="vertical"
     tools:context=".ui.profile.ProfileFragment">
 
     <EditText
         android:id="@+id/et_profile"
-        android:inputType="text"
-        android:hint="add"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="18dp"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"/>
+        android:hint="@string/add"
+        android:inputType="text" />
 
     <ImageView
         android:id="@+id/img_profile"
-        android:src="@drawable/raund"
-        android:layout_gravity="center"
         android:layout_width="300dp"
-        android:layout_height="300dp"/>
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:src="@drawable/raund" />
 
 </FrameLayout>
